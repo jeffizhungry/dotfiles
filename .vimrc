@@ -1,10 +1,11 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
-"       Amir Salihefendic
+"       Jeffrey Hwang
+"       Amir Salihefendic (Original)
 "       http://amix.dk - amix@amix.dk
 "
 " Version: 
-"       5.0 - 29/05/12 15:43:36
+"       12/22/2015   - added Vundle Support
 "
 " Blog_post: 
 "       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
@@ -23,6 +24,7 @@
 "       http://amix.dk/vim/vimrc.txt
 "
 " Sections:
+"    -> Plugins
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
@@ -36,10 +38,27 @@
 "    -> Spell checking
 "    -> Misc
 "    -> Helper functions
+"    -> Plugin Configurations
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Needed for Golang Syntax Highlighting (see sect below)
-filetype plugin indent on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Setup Vundle
+set nocompatible                 " Required
+filetype off                     " Required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" List of Plugins
+Plugin 'VundleVim/Vundle.vim'    " VIM plugin manager
+Plugin 'Valloric/YouCompleteMe'  " Auto-completion
+Plugin 'fatih/vim-go'            " Golang development tools
+
+call vundle#end()          
+filetype plugin indent on        " Required
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -127,7 +146,8 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme elflord
+" colorscheme molokai
+colorscheme torte
 set background=dark
 
 " Set extra options when running in GUI mode
@@ -337,7 +357,20 @@ map <leader>q :e ~/buffer<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" Replace all words under cursor with ...
+noremap <Leader>s :%s/\<<C-r><C-w>\>//gIc<left><left><left><left>
 
+" Commenting blocks of code.
+autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+autocmd FileType go               let b:comment_leader = '// '
+autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+autocmd FileType conf,fstab       let b:comment_leader = '# '
+autocmd FileType tex              let b:comment_leader = '% '
+autocmd FileType mail             let b:comment_leader = '> '
+autocmd FileType vim              let b:comment_leader = '" '
+autocmd FileType sql              let b:comment_leader = '-- '
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -400,36 +433,23 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Extra Functionality (added by J.Hwang)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pathogen Plugin Manager
-execute pathogen#infect('~/.vim/bundle/{}')
-
-" Commenting blocks of code.
-autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-autocmd FileType go               let b:comment_leader = '// '
-autocmd FileType sh,ruby,python   let b:comment_leader = '# '
-autocmd FileType conf,fstab       let b:comment_leader = '# '
-autocmd FileType tex              let b:comment_leader = '% '
-autocmd FileType mail             let b:comment_leader = '> '
-autocmd FileType vim              let b:comment_leader = '" '
-noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin Configurations (added by J.Hwang)
+" => Plugin Configurations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ [vim-go] Config"""
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>l <Plug>(go-metalinter)
+au FileType go nmap <leader>v <Plug>(go-vet)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
-" Open godoc in a browser
-au FileType go nmap <leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <leader>gd <Plug>(go-doc)
+au FileType go nmap <leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>ds <Plug>(go-def)
+au FileType go nmap <leader>dv <Plug>(go-def-vertical)
 
-" Show list of interface implemented by type under cursor
-au FileType go nmap <leader>s <Plug>(go-implements)
+au FileType go nmap <leader>i <Plug>(go-info)
+au FileType go nmap <leader>e <Plug>(go-rename)
 
 " Enable go imports to insert import paths instead of gofmt
 let g:go_fmt_command = "goimports"
