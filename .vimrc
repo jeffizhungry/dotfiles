@@ -45,19 +45,19 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setup Vundle
-set nocompatible                 " Required
-filetype off                     " Required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" List of Plugins
-Plugin 'VundleVim/Vundle.vim'    " VIM plugin manager
-Plugin 'Valloric/YouCompleteMe'  " Auto-completion
-Plugin 'fatih/vim-go'            " Golang development tools
-
-call vundle#end()          
-filetype plugin indent on        " Required
+" " Setup Vundle
+" set nocompatible                 " Required
+" filetype off                     " Required
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+" 
+" " List of Plugins
+" Plugin 'VundleVim/Vundle.vim'    " VIM plugin manager
+" Plugin 'Valloric/YouCompleteMe'  " Auto-completion
+" Plugin 'fatih/vim-go'            " Golang development tools
+" 
+" call vundle#end()          
+" filetype plugin indent on        " Required
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
