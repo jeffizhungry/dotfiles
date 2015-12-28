@@ -146,8 +146,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-" colorscheme molokai
-colorscheme torte
+colorscheme elford
 set background=dark
 
 " Set extra options when running in GUI mode
