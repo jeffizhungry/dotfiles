@@ -146,7 +146,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme elford
+colorscheme elflord
 set background=dark
 
 " Set extra options when running in GUI mode
