@@ -45,19 +45,19 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setup Vundle
-set nocompatible                 " Required
-filetype off                     " Required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" List of Plugins
-Plugin 'VundleVim/Vundle.vim'    " VIM plugin manager
-Plugin 'Valloric/YouCompleteMe'  " Auto-completion
-Plugin 'fatih/vim-go'            " Golang development tools
-
-call vundle#end()          
-filetype plugin indent on        " Required
+" " Setup Vundle
+" set nocompatible                 " Required
+" filetype off                     " Required
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+" 
+" " List of Plugins
+" Plugin 'VundleVim/Vundle.vim'    " VIM plugin manager
+" Plugin 'Valloric/YouCompleteMe'  " Auto-completion
+" Plugin 'fatih/vim-go'            " Golang development tools
+" 
+" call vundle#end()          
+" filetype plugin indent on        " Required
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -146,8 +146,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-" colorscheme molokai
-colorscheme torte
+colorscheme elflord
 set background=dark
 
 " Set extra options when running in GUI mode
